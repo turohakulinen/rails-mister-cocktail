@@ -1,0 +1,21 @@
+<div style="background-color: #EFF0F1; padding: 30px">
+  <h1><%= @cocktail.name %></h1>
+  <h3>Ingredients</h3>
+  <ul>
+  <% @cocktail.doses.each do |dose| %>
+    <li>
+      <%= dose.description + ' of ' + dose.ingredient.name %>
+    </li>
+  <% end %>
+  </ul>
+</div>
+
+<%= link_to edit_cocktail_path(@cocktail), class: "btn btn-warning" do %>
+    Edit
+<% end %>
+
+<%= link_to cocktails_path, class: "btn btn-primary" do %>
+    Back
+<% end %>
+
+

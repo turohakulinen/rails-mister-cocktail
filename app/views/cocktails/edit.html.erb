@@ -1,0 +1,27 @@
+<div style="background-color: #EFF0F1; padding: 30px">
+  <h1>Edit Cocktail</h1>
+  <h2><%= @cocktail.name %></h2>
+  <h3>Ingredients</h3>
+  <ul>
+  <% @cocktail.doses.each do |dose| %>
+    <li>
+      <%= dose.description + ' of ' + dose.ingredient.name %>
+      <%= link_to 'Delete', dose_path(dose), method: :delete, class: "btn btn-danger" %>
+    </li>
+  <% end %>
+  </ul>
+</div>
+
+<%= link_to new_cocktail_dose_path(@cocktail), class: "btn btn-primary" do %>
+  New Dose
+<% end %>
+
+<%= simple_form_for(@cocktail) do |f| %>
+  <%= f.input :name %>
+  <%= f.submit "Save", class: "btn btn-danger" %>
+<% end %>
+
+<%= link_to cocktails_path, class: "btn btn-primary" do %>
+  Back
+<% end %>
+
