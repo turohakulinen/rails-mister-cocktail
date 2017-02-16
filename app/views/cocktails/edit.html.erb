@@ -2,26 +2,33 @@
   <h1>Edit Cocktail</h1>
   <h2><%= @cocktail.name %></h2>
   <h3>Ingredients</h3>
-  <ul>
+  <div class="container-fluid">
   <% @cocktail.doses.each do |dose| %>
-    <li>
-      <%= dose.description + ' of ' + dose.ingredient.name %>
-      <%= link_to 'Delete', dose_path(dose), method: :delete, class: "btn btn-danger" %>
-    </li>
+    <div class="row" style="border: 1px solid grey; border-radius: 5px; padding: 10px; margin-bottom: 15px">
+      <div class="col-xs-5">
+        <%= dose.description + ' of ' + dose.ingredient.name %>
+      </div>
+      <div class="pull-right col-xs-3">
+        <%= link_to 'Delete', dose_path(dose), method: :delete, class: "btn btn-danger" %>
+      </div>
+    </div>
   <% end %>
-  </ul>
+  </div>
+</div>
+<div class="text-center" style="margin: 30px;">
+  <%= link_to new_cocktail_dose_path(@cocktail), class: "btn btn-primary" do %>
+    New Dose
+  <% end %>
+</div>
+<div class="text-center" style="margin: 30px;">
+  <%= simple_form_for(@cocktail) do |f| %>
+    <%= f.input :name %>
+    <%= f.submit "Save", class: "btn btn-danger" %>
+  <% end %>
 </div>
 
-<%= link_to new_cocktail_dose_path(@cocktail), class: "btn btn-primary" do %>
-  New Dose
-<% end %>
-
-<%= simple_form_for(@cocktail) do |f| %>
-  <%= f.input :name %>
-  <%= f.submit "Save", class: "btn btn-danger" %>
-<% end %>
-
-<%= link_to cocktails_path, class: "btn btn-primary" do %>
-  Back
-<% end %>
-
+<div class="text-center" style="margin: 30px;">
+  <%= link_to cocktails_path, class: "btn btn-primary" do %>
+    Back
+  <% end %>
+</div>
