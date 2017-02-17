@@ -5,12 +5,33 @@
 
 .card {
   background-color: lightgrey;
+  background-size: cover;
   margin: 30px 0px;
   padding: 20px 0px;
+  color: white;
+  border-radius: 30px;
+}
+
+.card a {
+  color: white;
+}
+
+.card a:hover {
+  text-decoration: none;
+  text-shadow: 2px 2px darkgrey;
 }
 
 .review{
   background-color: lightgrey;
   margin: 30px 0px;
   padding: 10px 10px;
+}
+
+.avatar-huge {
+  width: 100px;
+  border-radius: 50%;
+}
+
+.filler {
+  height: 100px;
 }

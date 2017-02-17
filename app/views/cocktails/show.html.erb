@@ -1,18 +1,23 @@
 <div style="background-color: #EFF0F1; padding: 30px">
   <h1><%= @cocktail.name %></h1>
+  <%= cl_image_tag @cocktail.photo, height: 400, width: 400, crop: :fill %>
   <h3>Ingredients</h3>
   <ul>
   <% @cocktail.doses.each do |dose| %>
     <li>
-      <%= dose.description + ' of ' + dose.ingredient.name %>
+      <%= dose.description + '  ' + dose.ingredient.name %>
     </li>
   <% end %>
   </ul>
+  <h3>Instructions</h3>
+  <p><%= @cocktail.instruction %></p>
 </div>
 
 <%= link_to edit_cocktail_path(@cocktail), class: "btn btn-warning" do %>
     Edit
 <% end %>
+
+<%= link_to 'Destroy', @cocktail, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
 
 <%= link_to cocktails_path, class: "btn btn-primary" do %>
     Back

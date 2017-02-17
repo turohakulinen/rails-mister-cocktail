@@ -23,6 +23,9 @@
 <div class="text-center" style="margin: 30px;">
   <%= simple_form_for(@cocktail) do |f| %>
     <%= f.input :name %>
+    <%= f.input :instruction %>
+    <%= f.input :photo %>
+    <%= f.input :photo_cache, as: :hidden %>
     <%= f.submit "Save", class: "btn btn-danger" %>
   <% end %>
 </div>

@@ -41,8 +41,14 @@ gem "autoprefixer-rails"
 gem 'rails-controller-testing'
 gem 'faker'
 gem 'scrapix'
+
+gem 'phantomjs', require: 'phantomjs/poltergeist'
+
 gem 'figaro'
 
+gem 'cloudinary', '1.1.0'
+
+gem 'carrierwave', '~> 0.11.2'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri

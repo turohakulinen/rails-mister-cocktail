@@ -9,22 +9,36 @@
 Dose.destroy_all
 Cocktail.destroy_all
 Ingredient.destroy_all
-
 ingre_has = JSON.parse(open('http://www.thecocktaildb.com/api/json/v1/1/list.php?i=list').read)
 
 ingre_has["drinks"].each do |i|
-  Ingredient.create(name: i["strIngredient1"])
+  img_url = "http://www.thecocktaildb.com/images/ingredients/" + URI.escape(i["strIngredient1"]) +"-Small.png"
+  ing = Ingredient.new(name: i["strIngredient1"])
+  ing.remote_photo_url = img_url
+  ing.save!
 end
 
+
 10.times do
-  cocktail_has = JSON.parse(open('http://www.thecocktaildb.com/api/json/v1/1/list.php?i=list').read)
-  cocktail = Cocktail.new(name: Faker::Beer.name)
-  cocktail.save!
-  (2..7).to_a.sample.times do
-    ing = Ingredient.all.sample
-    dose = Dose.new(description: descriptions.sample)
-    dose.cocktail = cocktail
-    dose.ingredient = ing
-    dose.save!
+  cocktail_has_big = JSON.parse(open('http://www.thecocktaildb.com/api/json/v1/1/random.php').read)
+  cocktail_has = cocktail_has_big["drinks"][0]
+  cocktail = Cocktail.new(name: cocktail_has["strDrink"], instruction: cocktail_has["strInstructions"])
+  cocktail.remote_photo_url = cocktail_has["strDrinkThumb"]
+  if cocktail.save
+    i = 1
+    loop do
+      ing_name = cocktail_has["strIngredient" + i.to_s]
+      break if ing_name.length == 0
+      ing = Ingredient.where("name like ?", ing_name)[0]
+      if !ing
+        ing = Ingredient.new(name: ing_name)
+        ing.save!
+      end
+      dose = Dose.new(description: cocktail_has["strMeasure" + i.to_s])
+      dose.cocktail = cocktail
+      dose.ingredient = ing
+      dose.save!
+      i += 1
+    end
   end
 end
