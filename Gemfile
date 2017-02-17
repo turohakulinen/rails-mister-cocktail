@@ -40,9 +40,6 @@ gem "autoprefixer-rails"
 # gem 'capistrano-rails', group: :development
 gem 'rails-controller-testing'
 gem 'faker'
-gem 'scrapix'
-
-gem 'phantomjs', require: 'phantomjs/poltergeist'
 
 gem 'figaro'
 
